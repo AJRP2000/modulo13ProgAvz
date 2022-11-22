@@ -41,16 +41,20 @@ public class ClientesImplementacionDAO implements ClientesDAO {
 	}
 
 	@Override
-	public int getPuntosAcumulados(Cliente cliente) throws CanjeException {
+	public Cliente getPuntosAcumulados(Cliente cliente) throws CanjeException {
 		DBManager dbm = DBManager.getInstance();
 		Connection c = dbm.connect();
-		String sql = "SELECT PuntosAcumulados FROM Clientes WHERE DNI = " + cliente.getDNI();
-		int resultado = 0;
+		String sql = "SELECT * FROM Clientes WHERE DNI = " + cliente.getDNI();
+		Cliente resultado = null;
 		try {
 			Statement s = c.createStatement();
 			ResultSet rs = s.executeQuery(sql);
 			if(rs.next()) { 
-				resultado = rs.getInt("PuntosAcumulados");
+				resultado = new Cliente();
+				resultado.setDNI(rs.getInt("DNI"));
+				resultado.setNombre(rs.getString("Nombre"));
+				resultado.setDireccion(rs.getString("Direccion"));
+				resultado.setPuntosAcumulados(rs.getInt("PuntosAcumulados"));
 			}
 			
 		} catch (SQLException e) {

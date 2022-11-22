@@ -8,7 +8,7 @@ public interface ClientesDAO {
 	
 	Cliente getCliente(Usuario usuario) throws CanjeException;
 	
-	int getPuntosAcumulados(Cliente cliente) throws CanjeException;
+	Cliente getPuntosAcumulados(Cliente cliente) throws CanjeException;
 	
 	void addCliente(Cliente cliente) throws CanjeException;
 	

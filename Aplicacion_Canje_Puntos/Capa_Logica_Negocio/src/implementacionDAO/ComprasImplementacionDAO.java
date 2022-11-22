@@ -39,6 +39,10 @@ public class ComprasImplementacionDAO implements ComprasDAO {
 				c.commit();
 			}
 			c.commit();
+			String sql5 = "UPDATE Clientes SET PuntosAcumulados = PuntosAcumulados - " + compra.getPuntosTotal() 
+					+ " WHERE DNI = " + compra.getDniCliente();
+			s.executeUpdate(sql5);
+			c.commit();
 		} catch (SQLException e) {
 			try {
 				c.rollback();

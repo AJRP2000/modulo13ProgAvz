@@ -69,7 +69,7 @@ public class CanjeHandler implements ICanjeHandler {
 	public Cliente getDatosCliente(Cliente cliente) throws CanjeException{
 		Cliente resultado = null;
 		try {
-			int puntos = clientesDAO.getPuntosAcumulados(cliente);
+			int puntos = clientesDAO.getPuntosAcumulados(cliente).getPuntosAcumulados();
 			resultado = new Cliente();
 			resultado.setPuntosAcumulados(puntos);
 		}catch(CanjeException e) {

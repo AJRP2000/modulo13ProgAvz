@@ -56,6 +56,11 @@ class testCanje {
 			Compra resultado = comprasDAO.mostrarCompra(compra);
 			assertEquals(compra.getPuntosTotal(), resultado.getTotalPuntos(), 0);
 			assertEquals(compra.getDniCliente(), resultado.getDniCliente(),0);
+			
+		//PASO 6: Verificar que se actualizo la cantidad de puntos del usuario.
+			Cliente resultadoCliente = clientesDAO.getPuntosAcumulados(cliente);
+			assertEquals(cliente.getPuntosAcumulados()-compra.getPuntosTotal(), resultadoCliente.getPuntosAcumulados(),0);
+			
 		} catch(Exception e) {}
 	}
 	
