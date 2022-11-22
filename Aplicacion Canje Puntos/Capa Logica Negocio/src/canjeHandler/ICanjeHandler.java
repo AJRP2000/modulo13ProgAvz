@@ -2,16 +2,19 @@ package canjeHandler;
 
 import java.util.ArrayList;
 
+import org.springframework.http.ResponseEntity;
+
 import clasesPrograma.*;
+import exceptions.CanjeException;
 
 public interface ICanjeHandler {
 	
-	Cliente logIn(Usuario usuario);
+	Cliente logIn(Usuario usuario) throws CanjeException;
 	
-	ArrayList<Producto> getProductos();
+	ArrayList<Producto> getProductos()throws CanjeException;
 	
-	void crearCompra(Compra compra);
+	void crearCompra(Compra compra)throws CanjeException;
 	
-	Cliente getDatosCliente(Cliente cliente);
+	Cliente getDatosCliente(Cliente cliente)throws CanjeException;
 
 }

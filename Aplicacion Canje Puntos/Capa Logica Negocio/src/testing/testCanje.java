@@ -25,44 +25,38 @@ class testCanje {
 
 	@Test
 	void test() {
+		
 		UsuariosDAO usuariosDAO = new UsuariosImplementacionDAO();
 		ComprasDAO comprasDAO = new ComprasImplementacionDAO();
 		ProductosDAO productosDAO = new ProductosImplementacionDAO();
 		ClientesDAO clientesDAO = new ClientesImplementacionDAO();
 		
-		CanjeHandler canjeHandler = new CanjeHandler(usuariosDAO, comprasDAO, productosDAO, clientesDAO);
-		
 		//PASO 0: Insertar los productos, usuario y cliente a usar para testear
-		
+		CanjeHandler canjeHandler = new CanjeHandler();
 		//insertarProductos(productosDAO);
 		//insertarUsuarioYCliente(usuariosDAO, clientesDAO);
 		
 		//PASO 1: Crear usuario y hacer login
 		Usuario usuario = new Usuario("usuario", "contrasena", 20266);
-		Cliente cliente = canjeHandler.logIn(usuario);
+		try {
+			Cliente cliente = canjeHandler.logIn(usuario);
 		
 		//PASO 2: Con el cliente cargado, revisar la lista de productos
-		ArrayList<Producto> productos = canjeHandler.getProductos();
+			ArrayList<Producto> productos = canjeHandler.getProductos();
 		
 		//PASO 3: Armar la compra
-		Compra compra = new Compra();
-		compra.setListaProductos(productos);
-		compra.setDniCliente(cliente.getDNI());
+			Compra compra = new Compra();
+			compra.setListaProductos(productos);
+			compra.setDniCliente(cliente.getDNI());
 		
 		//PASO 4: Insertar la compra
-		canjeHandler.crearCompra(compra);
+			canjeHandler.crearCompra(compra);
 		
 		//PASO 5: Verificar los datos de la compra
-		try {
 			Compra resultado = comprasDAO.mostrarCompra(compra);
-			int expected = compra.getPuntosTotal();
-			int result = resultado.getTotalPuntos();
-			assertEquals(expected, result, 0);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		System.out.println("AAAA");
+			assertEquals(compra.getPuntosTotal(), resultado.getTotalPuntos(), 0);
+			assertEquals(compra.getDniCliente(), resultado.getDniCliente(),0);
+		} catch(Exception e) {}
 	}
 	
 	//Funcion que insertara la lista productos que utilizaremos para testear
