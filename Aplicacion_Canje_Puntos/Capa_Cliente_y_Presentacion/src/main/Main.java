@@ -22,7 +22,6 @@ public class Main{
 		JFrame frame = new JFrameLogIn();
 		frame.setSize(800,650);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//frame.getContentPane().add(new JPanelABMCProgramas("Mostrar Programa"));
 		frame.setVisible(true); 
 		
 	}
