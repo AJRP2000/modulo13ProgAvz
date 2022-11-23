@@ -38,8 +38,6 @@ public class CanjeHandler implements ICanjeHandler {
 		
 		return resultado;
 	}
-
-	@RequestMapping("/getProductos")
 	public ArrayList<Producto> getProductos()  throws CanjeException{
 		ArrayList<Producto> listaProductos = null;
 		try {
@@ -52,7 +50,6 @@ public class CanjeHandler implements ICanjeHandler {
 		return listaProductos;
 	}
 
-	@RequestMapping("crearCompra")
 	public void crearCompra(Compra compra)  throws CanjeException{
 		try {
 			String idProductos = "(";
@@ -75,7 +72,6 @@ public class CanjeHandler implements ICanjeHandler {
 		}
 	}
 
-	@RequestMapping("getDatosCliente")
 	public Cliente getDatosCliente(Cliente cliente) throws CanjeException{
 		Cliente resultado = null;
 		try {
