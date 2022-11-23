@@ -2,17 +2,16 @@ package clasesModelo;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
+import clasesPrograma.Cliente;
 import clasesPrograma.Usuario;
 import clasesVista.JFrameCanje;
 import clasesVista.JFrameLogIn;
 import exceptions.CanjeException;
-import repositorioRemoto.repositorioRemoto;
+import requestBuilder.RequestBuilder;
 
 public class LogInModel {
 	
 	private JFrameLogIn frame;
-	private String path = repositorioRemoto.getPath();
 	
 	public LogInModel(JFrameLogIn frame) {
 		this.frame=frame;
@@ -20,19 +19,26 @@ public class LogInModel {
 	
 	public void logInUsuario(Usuario usuario) {
 		try {
-			boolean resultado=usuariosBO.checkUser(usuario);
-			if (resultado==true) {
+			Cliente cliente = null;
+			
+			cliente = RequestBuilder.requestLogIn(usuario);
+			
+		    
+			if (cliente!=null) {
 				frame.dispose();
-				JFrameCanje frameCanje = new JFrameCanje();
+				JFrameCanje frameCanje = new JFrameCanje(cliente);
 				frameCanje.setSize(800,650);
 				frameCanje.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frameCanje.setVisible(true);
 			}
 			else
 				JOptionPane.showMessageDialog(frame, "El Usuario y/o contrasena ingresado son invalidos");
-		} catch(CanjeException e) {
+		} catch (CanjeException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(frame, "Ha ocurrido un error: " + e.getMessage());
+			JOptionPane.showMessageDialog(frame, "Ha ocurrido un error: " +e.getMessage());
+		} catch(Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Ha ocurrido un error inesperado");
 		}
 	}
 }

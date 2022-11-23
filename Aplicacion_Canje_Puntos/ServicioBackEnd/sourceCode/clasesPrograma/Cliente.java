@@ -1,5 +1,7 @@
 package clasesPrograma;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 public class Cliente {
 	private int dni;
@@ -14,7 +16,7 @@ public class Cliente {
 		this.puntosAcumulados=puntosAcumulados;
 	}
 	
-	public Cliente() {}
+	public Cliente()  {}
 	
 	public String getNombre() {
 		return nombre;
